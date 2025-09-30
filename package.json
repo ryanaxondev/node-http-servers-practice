@@ -1,0 +1,25 @@
+{
+  "name": "node-http-servers-practice",
+  "version": "1.0.0",
+  "description": "A practice project with raw Node.js HTTP servers for Users, Tasks, and Tweets APIs.",
+  "main": "index.js",
+  "scripts": {
+    "start:users": "node index.js",
+    "start:tasks": "node tasks-server.js",
+    "start:tweets": "node tweet-server.js",
+    "start:unified": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "http",
+    "rest-api",
+    "practice",
+    "crud"
+  ],
+  "author": "Ryan Carter <ryanaxondev@gmail.com> (https://github.com/ryanaxondev)",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^24.5.1"
+  }
+}
