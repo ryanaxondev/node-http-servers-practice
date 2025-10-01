@@ -1,41 +1,47 @@
 # Node.js HTTP Servers Practice
 
-This project contains **three independent Node.js HTTP servers**, each focusing on a different resource.  
+This project contains **three independent Node.js HTTP servers**, each focusing on a different resource, plus a **unified server** that combines all routes.
 The goal is to practice building REST-like APIs **without any external frameworks** (like Express).
+
+---
 
 ## 🚀 Project Overview
 
-* **Users Server (`src/users/index.js`)**  
+* **Users Server (`src/users/index.js`)**
   Handles basic CRUD operations on a `users` collection (in-memory).
 
-* **Tasks Server (`src/tasks/tasks-server.js`)**  
+* **Tasks Server (`src/tasks/tasks-server.js`)**
   Handles CRUD operations for `tasks`, including updating completion status.
 
-* **Tweets Server (`src/tweets/tweet-server.js`)**  
+* **Tweets Server (`src/tweets/tweet-server.js`)**
   A simple tweet API with logging functionality that stores requests in `logs/log.txt`.
 
-Each server runs independently on its own port (**3000**, **3001**, **3002**).  
-You can run them one at a time depending on what you want to test.
+* **Unified Server (`src/server.js`)**
+  A single server that combines **Users**, **Tasks**, and **Tweets** APIs into one.
+
+Each standalone server runs on its own port (**3000**, **3001**, **3002**), while the unified server runs on **4000** by default.
 
 ---
 
 ## 📂 Project Structure
 
+```
 node-http-servers-practice/
 ├─ src/
-│ ├─ users/
-│ │ └─ index.js # Users server
-│ ├─ tasks/
-│ │ └─ tasks-server.js # Tasks server
-│ ├─ tweets/
-│ │ └─ tweet-server.js # Tweets server
-│ └─ server.js # Unified server (optional, not included yet)
+│  ├─ users/
+│  │  └─ index.js        # Users server
+│  ├─ tasks/
+│  │  └─ tasks-server.js # Tasks server
+│  ├─ tweets/
+│  │  └─ tweet-server.js # Tweets server
+│  └─ server.js          # Unified server
 ├─ logs/
-│ └─ log.txt # Created automatically by tweet-server
+│  └─ log.txt            # Created automatically by tweet-server
 ├─ package.json
 ├─ package-lock.json
 ├─ .gitignore
 └─ README.md
+```
 
 ---
 
@@ -77,35 +83,58 @@ node-http-servers-practice/
 
 ---
 
+### 4️⃣ Unified API (`src/server.js`)
+
+The unified server combines **Users**, **Tasks**, and **Tweets** into one API.
+It also includes a health check endpoint:
+
+| Method | Endpoint   | Description              |
+| ------ | ---------- | ------------------------ |
+| GET    | `/health`  | Server uptime and status |
+| ...    | `/users/*` | All Users API routes     |
+| ...    | `/tasks/*` | All Tasks API routes     |
+| ...    | `/tweet*`  | All Tweets API routes    |
+
+---
+
 ## 🛠️ How to Run
 
-1. Clone the repository:
+### Option 1: Run files directly
 
-   ```
-   git clone https://github.com/ryanaxondev/node-http-servers-practice.git
-   cd node-http-servers-practice
-   ```
+```
+# Run Users server
+node src/users/index.js
 
-2. Run any server (example: users server):
+# Run Tasks server
+node src/tasks/tasks-server.js
 
-   ```
-   node src/users/index.js
-   ```
+# Run Tweets server
+node src/tweets/tweet-server.js
 
-   or (example: tasks server):
+# Run Unified server
+node src/server.js
+```
 
-   ```
-   node src/tasks/tasks-server.js
-   ```
+### Option 2: Run with npm scripts
 
-   or (example: tweets server):
+I’ve added handy npm scripts to make it easier:
 
-   ```
-   node src/tweets/tweet-server.js
-   ```
+```
+# Run Users server
+npm run start:users
 
+# Run Tasks server
+npm run start:tasks
 
-3. Test endpoints using **Postman**, **cURL**, or your browser.
+# Run Tweets server
+npm run start:tweets
+
+# Run Unified server
+npm run start:unified
+
+# Default (runs Unified server)
+npm start
+```
 
 ---
 
@@ -116,11 +145,12 @@ node-http-servers-practice/
 * How to implement **CRUD operations** without frameworks.
 * How to handle **JSON parsing and error handling**.
 * How to add **logging** to your APIs.
+* How to combine multiple APIs into one **unified server**.
 
 ---
 
 ## 📖 Next Steps
 
-* Combine all three servers into a **single unified server** (planned as `src/server.js`).
 * Add persistence with a real database (MongoDB, PostgreSQL).
 * Use Express.js or another framework to simplify routing.
+* Add automated tests with a testing framework.

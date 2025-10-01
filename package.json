@@ -2,12 +2,13 @@
   "name": "node-http-servers-practice",
   "version": "1.0.0",
   "description": "A practice project with raw Node.js HTTP servers for Users, Tasks, and Tweets APIs.",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "start:users": "node index.js",
-    "start:tasks": "node tasks-server.js",
-    "start:tweets": "node tweet-server.js",
-    "start:unified": "node server.js",
+    "start:users": "node src/users/index.js",
+    "start:tasks": "node src/tasks/tasks-server.js",
+    "start:tweets": "node src/tweets/tweet-server.js",
+    "start:unified": "node src/server.js",
+    "start": "npm run start:unified",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
